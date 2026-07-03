@@ -10,7 +10,7 @@ export interface ButtonState {
   right: boolean;
   sl: boolean;
   sr: boolean;
-  stickClick: boolean;
+  zl: boolean;
 }
 
 export interface InputFrame {
@@ -30,6 +30,6 @@ export const NEUTRAL_FRAME: InputFrame = {
   stick: { x: 0, y: 0 },
   buttons: {
     up: false, down: false, left: false, right: false,
-    sl: false, sr: false, stickClick: false,
+    sl: false, sr: false, zl: false,
   },
 };

@@ -3,8 +3,8 @@
 A browser-based teleprompter you drive with a Nintendo Switch **Left JoyCon**. Load a
 PDF, and its text is reflowed into large, centered, vertically-scrolling copy. The
 analog stick acts as a proportional **throttle** (push up to scroll forward, down to
-reverse, further = faster); a stick-click toggles hands-free **cruise**; the D-pad and
-shoulder buttons handle text size, paragraph seeking, and max speed.
+reverse, further = faster); ZL toggles hands-free **cruise**; the D-pad and
+shoulder buttons handle max speed, paragraph seeking, and text size.
 
 Input comes from an **unmodified** [QJoyControl](https://github.com/erikmwerner/QJoyControl):
 the app uses QJoyControl's built-in *analog-stick → mouse* feature (captured in the
@@ -61,23 +61,23 @@ http://localhost:5173/?input=keyboard
 | Key         | Action                         |
 |-------------|--------------------------------|
 | ↑ / ↓       | Throttle forward / reverse     |
-| `c`         | Toggle cruise                  |
-| `i` / `k`   | Text size up / down            |
+| `z`         | Toggle cruise                  |
+| `i` / `k`   | Increase / decrease max speed  |
 | `j` / `l`   | Seek back / forward a paragraph|
-| `q` / `e`   | Decrease / increase max speed  |
+| `q` / `e`   | Text size down / up            |
 
 ## Controls (Left JoyCon)
 
 | Input        | Action                                         |
 |--------------|------------------------------------------------|
 | Stick ▲ / ▼  | Throttle: scroll forward / reverse (proportional) |
-| Stick click  | Toggle cruise (hands-free at max speed)        |
-| D-pad ▲ / ▼  | Text size up / down                            |
+| ZL           | Toggle cruise (hands-free at max speed)        |
+| D-pad ▲ / ▼  | Increase / decrease max scroll speed           |
 | D-pad ◀ / ▶  | Seek back / forward one paragraph              |
-| SL / SR      | Decrease / increase max scroll speed           |
+| SL / SR      | Text size down / up                            |
 
-**Scroll behavior:** centering the stick holds position. Clicking the stick starts
-cruise; clicking again pauses; nudging the stick during cruise hands control back to
+**Scroll behavior:** centering the stick holds position. Pressing ZL starts
+cruise; pressing again pauses; nudging the stick during cruise hands control back to
 manual. See [QJOYCONTROL-SETUP.md](./QJOYCONTROL-SETUP.md) for the QJoyControl
 button-to-key mapping this expects.
 

@@ -17,13 +17,13 @@ Configure QJoyControl's button-to-key mapping for the Left JoyCon as follows:
 
 | Left JoyCon input | Key | Teleprompter action        |
 |-------------------|-----|----------------------------|
-| D-pad Up          | i   | Text size up               |
-| D-pad Down        | k   | Text size down             |
+| D-pad Up          | i   | Increase max scroll speed  |
+| D-pad Down        | k   | Decrease max scroll speed  |
 | D-pad Left        | j   | Seek back one paragraph    |
 | D-pad Right       | l   | Seek forward one paragraph |
-| SL                | q   | Decrease max scroll speed  |
-| SR                | e   | Increase max scroll speed  |
-| Stick click       | c   | Toggle cruise (auto-scroll)|
+| SL                | q   | Text size down             |
+| SR                | e   | Text size up               |
+| ZL                | z   | Toggle cruise (auto-scroll)|
 
 (These keys are defined in `src/config.ts` as `CONFIG.keyMap` — change both places
 if you prefer different keys.)
@@ -35,9 +35,9 @@ if you prefer different keys.)
    release; click again to re-engage. The HUD shows "Controller ●" when engaged.
 3. Drive it:
    - **Stick up / down** — scroll forward / reverse; how far you push sets the speed.
-   - **Stick click** — toggle cruise (hands-free scroll at the max speed).
-   - **D-pad up / down** — text size; **D-pad left / right** — seek by paragraph.
-   - **SL / SR** — decrease / increase max scroll speed.
+   - **ZL** — toggle cruise (hands-free scroll at the max speed).
+   - **D-pad up / down** — increase / decrease max scroll speed.
+   - **D-pad left / right** — seek by paragraph; **SL / SR** — text size down / up.
 
 ## Tuning
 If the throttle feels too fast/slow, adjust QJoyControl's analog sensitivity and/or

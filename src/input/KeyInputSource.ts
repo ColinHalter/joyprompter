@@ -19,10 +19,6 @@ export class KeyInputSource implements InputSource {
     return this.frame;
   }
 
-  isConnected(): boolean {
-    return true;
-  }
-
   start(): void {
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);

@@ -28,5 +28,3 @@ html, body { margin: 0; height: 100%; background: #000; color: #f4f4f4;
 }
 #hud.faded { opacity: 0; }
 .hud-item { color: #cfd8e3; }
-.hud-item.ok { color: #7fd88f; }
-.hud-item.bad { color: #e08080; }

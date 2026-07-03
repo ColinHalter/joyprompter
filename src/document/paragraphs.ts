@@ -9,8 +9,8 @@ export function itemsToText(items: RawTextItem[]): string {
 
 export function textToParagraphs(text: string): string[] {
   return text
-    .split(/\n[ \t]*\n+/)
-    .map((p) => p.replace(/\s*\n\s*/g, ' ').replace(/[ \t]+/g, ' ').trim())
+    .split('\n')
+    .map((p) => p.replace(/[ \t]+/g, ' ').trim())
     .filter((p) => p.length > 0);
 }
 

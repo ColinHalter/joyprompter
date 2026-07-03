@@ -13,9 +13,12 @@ describe('itemsToText', () => {
 });
 
 describe('textToParagraphs', () => {
-  it('splits on blank lines and joins wrapped lines', () => {
+  it('splits on every line break, keeping each line as its own paragraph', () => {
     const text = 'Line one\nline one cont.\n\nSecond para\n';
-    expect(textToParagraphs(text)).toEqual(['Line one line one cont.', 'Second para']);
+    expect(textToParagraphs(text)).toEqual(['Line one', 'line one cont.', 'Second para']);
+  });
+  it('collapses runs of horizontal whitespace within a line', () => {
+    expect(textToParagraphs('  Spaced   out \ttext ')).toEqual(['Spaced out text']);
   });
   it('returns an empty array for whitespace-only text', () => {
     expect(textToParagraphs('   \n\n  \n')).toEqual([]);

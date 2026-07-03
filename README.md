@@ -31,7 +31,6 @@ The PDF is parsed entirely in your browser — nothing is uploaded, and it works
 ## Install
 
 ```bash
-cd teleprompter
 npm install
 ```
 
@@ -115,7 +114,7 @@ All tunables live in [`src/config.ts`](./src/config.ts):
 ## Project structure
 
 ```
-teleprompter/
+.
 ├── index.html                 # app shell (drop zone, scroller, HUD)
 ├── QJOYCONTROL-SETUP.md        # one-time QJoyControl configuration guide
 ├── src/
@@ -133,6 +132,7 @@ teleprompter/
 │       ├── mouseRateToStick.ts       # mouse-rate → normalized throttle
 │       ├── QJoyControlInputSource.ts # Pointer Lock + mapped keys (default)
 │       └── KeyboardInputSource.ts    # keyboard dev/test source
+├── docs/                       # design specs and implementation plans
 └── (package.json, tsconfig.json, vite.config.ts)
 ```
 

@@ -9,7 +9,6 @@ export function stateLabel(state: ScrollState): string {
 }
 
 export interface HudModel {
-  connected: boolean;
   state: ScrollState;
   maxSpeed: number;
   fontSize: number;
@@ -22,7 +21,6 @@ export class Hud {
   update(m: HudModel): void {
     const pct = Math.round(m.progress * 100);
     this.el.innerHTML = `
-      <span class="hud-item ${m.connected ? 'ok' : 'bad'}">${m.connected ? 'Controller ●' : 'Click to engage ○'}</span>
       <span class="hud-item">${stateLabel(m.state)}</span>
       <span class="hud-item">Max ${Math.round(m.maxSpeed)} px/s</span>
       <span class="hud-item">Text ${Math.round(m.fontSize)} px</span>

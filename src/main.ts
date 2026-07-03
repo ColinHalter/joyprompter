@@ -5,8 +5,6 @@ import { ScrollEngine } from './scroll/ScrollEngine';
 import { DocumentView } from './document/DocumentView';
 import { nextParagraphOffset } from './document/paragraphs';
 import { Hud } from './hud/Hud';
-import type { InputSource } from './input/InputSource';
-import { QJoyControlInputSource } from './input/QJoyControlInputSource';
 import { KeyInputSource } from './input/KeyInputSource';
 
 const scroller = document.getElementById('scroller') as HTMLElement;
@@ -20,22 +18,8 @@ const engine = new ScrollEngine();
 const mapper = new ControlMapper();
 const hud = new Hud(hudEl);
 
-const useKeyboard = new URLSearchParams(location.search).get('input') === 'keyboard';
-let engage: (() => void) | null = null;
-let source: InputSource;
-if (useKeyboard) {
-  source = new KeyInputSource();
-} else {
-  const qjc = new QJoyControlInputSource(scroller);
-  source = qjc;
-  engage = () => qjc.engage();
-}
+const source = new KeyInputSource();
 source.start();
-
-// Click the scroller to engage Pointer Lock (captures the stick-as-mouse).
-scroller.addEventListener('click', () => {
-  if (engage && document.pointerLockElement !== scroller) engage();
-});
 
 let fontSize = CONFIG.initialFontSize;
 view.setFontSize(fontSize);
@@ -123,7 +107,6 @@ function tick(ts: number) {
   if (ts - lastActivity > CONFIG.hudHideMs) hudEl.classList.add('faded');
 
   hud.update({
-    connected: source.isConnected(),
     state: engine.state,
     maxSpeed: engine.maxSpeed,
     fontSize,

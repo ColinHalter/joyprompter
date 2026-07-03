@@ -4,11 +4,14 @@ import type { InputSource } from './InputSource';
 import { CONFIG } from '../config';
 
 /**
- * Hardware-free dev/testing source. Arrow Up/Down simulate the throttle stick;
- * the CONFIG.keyMap keys (i/k/j/l/q/e/c by default) simulate the buttons.
+ * The app's sole input source. QJoyControl (or a bare keyboard for testing)
+ * delivers everything as key events: ArrowUp / ArrowDown are the binary throttle
+ * (stick up / down), and the CONFIG.keyMap keys are the buttons.
  */
-export class KeyboardInputSource implements InputSource {
+export class KeyInputSource implements InputSource {
   private frame: InputFrame = structuredClone(NEUTRAL_FRAME);
+  private upHeld = false;
+  private downHeld = false;
   private onKeyDown = (e: KeyboardEvent) => this.setKey(e.key, true);
   private onKeyUp = (e: KeyboardEvent) => this.setKey(e.key, false);
 
@@ -31,8 +34,12 @@ export class KeyboardInputSource implements InputSource {
   }
 
   private setKey(key: string, down: boolean): void {
-    if (key === 'ArrowUp') { this.frame.stick.y = down ? 1 : 0; return; }
-    if (key === 'ArrowDown') { this.frame.stick.y = down ? -1 : 0; return; }
+    if (key === 'ArrowUp' || key === 'ArrowDown') {
+      if (key === 'ArrowUp') this.upHeld = down;
+      else this.downHeld = down;
+      this.frame.stick.y = (this.upHeld ? 1 : 0) - (this.downHeld ? 1 : 0);
+      return;
+    }
     const btn: keyof ButtonState | undefined = CONFIG.keyMap[key];
     if (btn) this.frame.buttons[btn] = down;
   }

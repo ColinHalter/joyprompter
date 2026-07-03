@@ -7,7 +7,7 @@ import { nextParagraphOffset } from './document/paragraphs';
 import { Hud } from './hud/Hud';
 import type { InputSource } from './input/InputSource';
 import { QJoyControlInputSource } from './input/QJoyControlInputSource';
-import { KeyboardInputSource } from './input/KeyboardInputSource';
+import { KeyInputSource } from './input/KeyInputSource';
 
 const scroller = document.getElementById('scroller') as HTMLElement;
 const docEl = document.getElementById('doc') as HTMLElement;
@@ -24,7 +24,7 @@ const useKeyboard = new URLSearchParams(location.search).get('input') === 'keybo
 let engage: (() => void) | null = null;
 let source: InputSource;
 if (useKeyboard) {
-  source = new KeyboardInputSource();
+  source = new KeyInputSource();
 } else {
   const qjc = new QJoyControlInputSource(scroller);
   source = qjc;

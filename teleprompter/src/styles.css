@@ -1,0 +1,32 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; color: #f4f4f4;
+  font-family: Georgia, 'Times New Roman', serif; }
+
+#scroller {
+  position: fixed; inset: 0; overflow: hidden; scroll-behavior: auto;
+  padding: 50vh 8vw; /* half-screen padding so first/last lines can center */
+}
+#doc { font-size: 48px; line-height: 1.5; max-width: 20ch; margin: 0 auto;
+  text-align: center; }
+.tp-para { margin: 0 0 1.2em; }
+.tp-empty { color: #ff8080; font-size: 0.6em; }
+
+#drop-zone {
+  position: fixed; inset: 0; z-index: 10; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  background: rgba(0,0,0,0.85); color: #bbb; font-size: 22px; cursor: pointer;
+}
+#drop-zone.hidden { display: none; }
+#drop-zone.dragover { background: rgba(40,80,40,0.9); color: #fff; }
+
+#hud {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 5;
+  display: flex; gap: 18px; justify-content: center; align-items: center;
+  padding: 8px; background: rgba(0,0,0,0.55); font-family: system-ui, sans-serif;
+  font-size: 13px; transition: opacity 0.4s; opacity: 1;
+}
+#hud.faded { opacity: 0; }
+.hud-item { color: #cfd8e3; }
+.hud-item.ok { color: #7fd88f; }
+.hud-item.bad { color: #e08080; }

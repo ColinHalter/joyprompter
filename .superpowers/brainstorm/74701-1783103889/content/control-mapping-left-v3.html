@@ -1,0 +1,62 @@
+<h2>Control mapping — Left JoyCon (final?)</h2>
+<p class="subtitle">SL/SR now set the max scroll speed the throttle scales against. No reset button. Click to lock it in or tweak.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Left JoyCon, upright, one hand</div>
+  <div class="mockup-body">
+    <div style="display:flex; gap:40px; align-items:center; justify-content:center; flex-wrap:wrap;">
+
+      <!-- JoyCon body: tall/vertical -->
+      <div style="position:relative; width:150px; height:340px; background:#2b2f36; border:3px solid #4a5568; border-radius:26px; box-shadow:inset 0 0 0 2px #1a1d22;">
+
+        <!-- Analog stick, top -->
+        <div style="position:absolute; left:36px; top:26px; width:78px; height:78px; border-radius:50%; background:#12151a; border:3px solid #5a6472; display:flex; align-items:center; justify-content:center; color:#9fb3c8; font-size:9px; text-align:center;">
+          STICK<br/>throttle<br/><span style="color:#f0c674;">click = play/pause</span>
+        </div>
+        <div style="position:absolute; left:118px; top:32px; color:#7fd88f; font-size:11px; white-space:nowrap;">▲ forward</div>
+        <div style="position:absolute; left:118px; top:84px; color:#e0956b; font-size:11px; white-space:nowrap;">▼ reverse</div>
+
+        <!-- D-pad diamond, middle -->
+        <div style="position:absolute; left:62px; top:150px; width:26px; height:26px; border-radius:5px; background:#3a4048; border:2px solid #6b7688; color:#cbd5e0; font-size:13px; display:flex; align-items:center; justify-content:center;">▲</div>
+        <div style="position:absolute; left:28px; top:184px; width:26px; height:26px; border-radius:5px; background:#3a4048; border:2px solid #6b7688; color:#cbd5e0; font-size:13px; display:flex; align-items:center; justify-content:center;">◀</div>
+        <div style="position:absolute; left:96px; top:184px; width:26px; height:26px; border-radius:5px; background:#3a4048; border:2px solid #6b7688; color:#cbd5e0; font-size:13px; display:flex; align-items:center; justify-content:center;">▶</div>
+        <div style="position:absolute; left:62px; top:218px; width:26px; height:26px; border-radius:5px; background:#3a4048; border:2px solid #6b7688; color:#cbd5e0; font-size:13px; display:flex; align-items:center; justify-content:center;">▼</div>
+
+        <!-- minus + capture near bottom -->
+        <div style="position:absolute; left:40px; top:274px; width:20px; height:20px; color:#8896a8; font-size:16px; display:flex; align-items:center; justify-content:center;">−</div>
+        <div style="position:absolute; left:90px; top:276px; width:16px; height:16px; border:2px solid #8896a8; border-radius:3px;"></div>
+
+        <!-- SL / SR on rail -->
+        <div style="position:absolute; right:-3px; top:120px; width:16px; height:52px; background:#3a4048; border:2px solid #6b7688; border-radius:4px; color:#cbd5e0; font-size:8px; display:flex; align-items:center; justify-content:center; text-align:center;">SL<br/>−spd</div>
+        <div style="position:absolute; right:-3px; top:190px; width:16px; height:52px; background:#3a4048; border:2px solid #6b7688; border-radius:4px; color:#cbd5e0; font-size:8px; display:flex; align-items:center; justify-content:center; text-align:center;">SR<br/>+spd</div>
+      </div>
+
+      <!-- Legend -->
+      <div style="min-width:270px; text-align:left; font-size:14px; line-height:1.9;">
+        <div><b style="color:#7fd88f;">Stick ▲ / ▼</b> — throttle: forward / reverse, proportional up to the current max speed (center = hold still).</div>
+        <div><b style="color:#f0c674;">Stick click</b> — play / pause auto-scroll</div>
+        <div><b style="color:#cbd5e0;">D-pad ▲ / ▼</b> — text size up / down</div>
+        <div><b style="color:#cbd5e0;">D-pad ◀ / ▶</b> — nudge back / forward one paragraph (seek)</div>
+        <div><b style="color:#cbd5e0;">SL / SR</b> — decrease / increase max scroll speed (the ceiling the throttle scales against)</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Lock it in</h3>
+      <p>This is the final control mapping.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>One more tweak</h3>
+      <p>I'll describe it.</p>
+    </div>
+  </div>
+</div>

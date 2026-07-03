@@ -1,0 +1,58 @@
+<h2>Section 2 — The throttle → scroll model</h2>
+<p class="subtitle">How stick position becomes scroll motion. This is the core feel.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Stick deflection → scroll speed</div>
+  <div class="mockup-body">
+    <div style="display:flex; gap:30px; align-items:center; justify-content:center; flex-wrap:wrap;">
+
+      <!-- curve diagram -->
+      <svg width="300" height="240" viewBox="0 0 300 240">
+        <!-- axes -->
+        <line x1="150" y1="10" x2="150" y2="230" stroke="#4a5568" stroke-width="1"/>
+        <line x1="20" y1="120" x2="280" y2="120" stroke="#4a5568" stroke-width="1"/>
+        <!-- deadzone band -->
+        <rect x="130" y="10" width="40" height="220" fill="#3a4048" opacity="0.4"/>
+        <!-- forward line (up = forward) -->
+        <line x1="170" y1="120" x2="270" y2="30" stroke="#7fd88f" stroke-width="3"/>
+        <!-- reverse line -->
+        <line x1="130" y1="120" x2="30" y2="210" stroke="#e0956b" stroke-width="3"/>
+        <!-- max speed caps -->
+        <line x1="255" y1="30" x2="285" y2="30" stroke="#f0c674" stroke-dasharray="4" stroke-width="1.5"/>
+        <line x1="15" y1="210" x2="45" y2="210" stroke="#f0c674" stroke-dasharray="4" stroke-width="1.5"/>
+        <!-- labels -->
+        <text x="200" y="24" fill="#7fd88f" font-size="11">forward</text>
+        <text x="45" y="205" fill="#e0956b" font-size="11">reverse</text>
+        <text x="112" y="20" fill="#9fb3c8" font-size="10" transform="rotate(0)">speed</text>
+        <text x="250" y="135" fill="#9fb3c8" font-size="10">stick ▲</text>
+        <text x="24" y="135" fill="#9fb3c8" font-size="10">stick ▼</text>
+        <text x="138" y="240" fill="#8896a8" font-size="9">deadzone</text>
+        <text x="200" y="45" fill="#f0c674" font-size="9">max speed (SL/SR)</text>
+      </svg>
+
+      <!-- explanation -->
+      <div style="min-width:280px; text-align:left; font-size:13px; line-height:1.8;">
+        <div><b style="color:#9fb3c8;">1. Deadzone</b> — small center band reads as zero, so a resting thumb won't drift.</div>
+        <div><b style="color:#9fb3c8;">2. Proportional</b> — beyond the deadzone, speed rises smoothly with deflection. Push a little = crawl; push all the way = max.</div>
+        <div><b style="color:#f0c674;">3. Max speed ceiling</b> — full deflection maps to the current max speed. SL lowers it, SR raises it (clamped to a sane range).</div>
+        <div><b style="color:#7fd88f;">4. Direction</b> — up scrolls the script forward (text moves up), down reverses.</div>
+        <div><b style="color:#9fb3c8;">5. Motion</b> — every animation frame, position advances by <code>speed × elapsed&nbsp;time</code>, so scrolling is smooth and framerate-independent.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; padding-top:12px; border-top:1px solid #3a4048; color:#9fb3c8; font-size:12px;">
+      <b style="color:#f0c674;">Pause</b> (stick click) freezes motion regardless of stick position — useful to hold your place. Click again to resume the throttle.
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content"><h3>This feels right</h3><p>Continue.</p></div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content"><h3>Adjust the feel</h3><p>e.g. non-linear curve, different deadzone/limits — I'll explain.</p></div>
+  </div>
+</div>

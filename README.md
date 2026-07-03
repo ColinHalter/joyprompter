@@ -2,30 +2,29 @@
 
 A browser-based teleprompter you drive with a Nintendo Switch **Left JoyCon**. Load a
 PDF, and its text is reflowed into large, centered, vertically-scrolling copy. The
-analog stick acts as a proportional **throttle** (push up to scroll forward, down to
-reverse, further = faster); ZL toggles hands-free **cruise**; the D-pad and
-shoulder buttons handle max speed, paragraph seeking, and text size.
+analog stick acts as a binary **throttle** (push up to scroll forward, down to reverse,
+both at the max speed); ZL toggles hands-free **cruise**; the D-pad and shoulder buttons
+handle max speed, paragraph seeking, and text size.
 
 Input comes from an **unmodified** [QJoyControl](https://github.com/erikmwerner/QJoyControl):
-the app uses QJoyControl's built-in *analog-stick → mouse* feature (captured in the
-browser via the Pointer Lock API and interpreted as a throttle) and its
-*button → keyboard key* mapping. **No custom QJoyControl build is required.**
+it maps every JoyCon input to a keyboard key — the stick's up/down to the arrow keys and
+the buttons to letter keys. **No custom QJoyControl build is required.**
 
 The PDF is parsed entirely in your browser — nothing is uploaded, and it works offline.
 
 ## Features
 
 - PDF text extraction and reflow into a clean teleprompter column
-- Proportional throttle scrolling (forward/reverse) with a center deadzone
+- Binary throttle scrolling — forward/reverse at the max speed
 - Hands-free cruise mode at an adjustable max speed
 - Text-size and per-paragraph seek controls
-- On-screen HUD: controller status, scroll state, max speed, text size, progress
-- Hardware-free keyboard mode for development and testing
+- On-screen HUD: scroll state, max speed, text size, progress
+- Runs entirely from the keyboard, so it works with or without a JoyCon
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 18+ and npm
-- A modern browser (Pointer Lock + ES modules)
+- A modern browser (ES modules)
 - For controller use: a Left JoyCon and QJoyControl (see [QJOYCONTROL-SETUP.md](./QJOYCONTROL-SETUP.md))
 
 ## Install
@@ -43,43 +42,38 @@ npm run dev
 Vite prints a local URL (default `http://localhost:5173`). Open it, then:
 
 1. **Load a PDF** — drag a PDF onto the window, or click to choose one.
-2. **Engage the controller** — click the text area once to enable Pointer Lock
-   (this lets the browser read the stick-as-mouse without the cursor hitting screen
-   edges). Press **Esc** to release; click again to re-engage. The HUD reads
-   **"Controller ●"** when engaged.
+2. **Drive it** — use the JoyCon (or the keyboard keys below). There is no engage step;
+   the app responds to input immediately.
 
-> Requires QJoyControl configured per [QJOYCONTROL-SETUP.md](./QJOYCONTROL-SETUP.md).
+> For JoyCon use, configure QJoyControl per [QJOYCONTROL-SETUP.md](./QJOYCONTROL-SETUP.md).
 
-### Try it without a JoyCon (keyboard mode)
+### Keyboard keys
 
-Open the app with `?input=keyboard`:
+The app is always keyboard-driven (QJoyControl just sends these keys), so you can use it
+without a JoyCon:
 
-```
-http://localhost:5173/?input=keyboard
-```
-
-| Key         | Action                         |
-|-------------|--------------------------------|
-| ↑ / ↓       | Throttle forward / reverse     |
-| `z`         | Toggle cruise                  |
-| `i` / `k`   | Increase / decrease max speed  |
-| `j` / `l`   | Seek back / forward a paragraph|
-| `q` / `e`   | Text size down / up            |
+| Key         | Action                                 |
+|-------------|----------------------------------------|
+| ↑ / ↓       | Throttle forward / reverse (max speed) |
+| `z`         | Toggle cruise                          |
+| `i` / `k`   | Increase / decrease max speed          |
+| `j` / `l`   | Seek back / forward a paragraph        |
+| `q` / `e`   | Text size down / up                    |
 
 ## Controls (Left JoyCon)
 
 | Input        | Action                                         |
 |--------------|------------------------------------------------|
-| Stick ▲ / ▼  | Throttle: scroll forward / reverse (proportional) |
+| Stick ▲ / ▼  | Throttle: scroll forward / reverse at max speed |
 | ZL           | Toggle cruise (hands-free at max speed)        |
 | D-pad ▲ / ▼  | Increase / decrease max scroll speed           |
 | D-pad ◀ / ▶  | Seek back / forward one paragraph              |
 | SL / SR      | Text size down / up                            |
 
-**Scroll behavior:** centering the stick holds position. Pressing ZL starts
-cruise; pressing again pauses; nudging the stick during cruise hands control back to
-manual. See [QJOYCONTROL-SETUP.md](./QJOYCONTROL-SETUP.md) for the QJoyControl
-button-to-key mapping this expects.
+**Scroll behavior:** centering the stick holds position; pushing up or down scrolls at the
+max speed. Pressing ZL starts cruise; pressing again pauses; nudging the stick during
+cruise hands control back to manual. See [QJOYCONTROL-SETUP.md](./QJOYCONTROL-SETUP.md) for
+the QJoyControl key mapping this expects.
 
 ## Build (production)
 
@@ -103,9 +97,7 @@ All tunables live in [`src/config.ts`](./src/config.ts):
 
 | Setting | Purpose |
 |---------|---------|
-| `mouseFullThrottleRate` | Mouse-movement rate (px/s) that maps to full throttle. Tune together with QJoyControl's analog sensitivity. |
-| `invertThrottle` | Set `true` if up/down feel reversed. |
-| `deadzone` | Ignores small stick/mouse jitter near center. |
+| `deadzone` | Ignores tiny throttle jitter near center. |
 | `minMaxSpeed` / `maxMaxSpeed` / `maxSpeedStep` / `initialMaxSpeed` | Scroll speed range and SL/SR step. |
 | `minFontSize` / `maxFontSize` / `fontSizeStep` / `initialFontSize` | Text size range and D-pad step. |
 | `hudHideMs` | How long before the HUD fades after inactivity. |
@@ -129,9 +121,7 @@ All tunables live in [`src/config.ts`](./src/config.ts):
 │   ├── hud/Hud.ts                    # status overlay
 │   └── input/
 │       ├── InputSource.ts            # source interface
-│       ├── mouseRateToStick.ts       # mouse-rate → normalized throttle
-│       ├── QJoyControlInputSource.ts # Pointer Lock + mapped keys (default)
-│       └── KeyboardInputSource.ts    # keyboard dev/test source
+│       └── KeyInputSource.ts         # key events (QJoyControl or keyboard) → InputFrame
 ├── docs/                       # design specs and implementation plans
 └── (package.json, tsconfig.json, vite.config.ts)
 ```
@@ -139,10 +129,10 @@ All tunables live in [`src/config.ts`](./src/config.ts):
 ## How input flows
 
 ```
-Left JoyCon ──▶ QJoyControl (unmodified) ──▶ OS mouse + key events ──▶ Browser
-                                                                        │
-   stick → mouse ─(Pointer Lock movementY)→ mouseRateToStick → stick.y  │
-   buttons → keys ─(keydown/keyup)────────→ ButtonState               ──┴─▶ ScrollEngine + DocumentView
+Left JoyCon ──▶ QJoyControl (unmodified) ──▶ OS key events ──▶ Browser
+                                                                │
+   stick up/down → ↑/↓ keys ─(keydown/keyup)→ stick.y ∈ {-1,0,1} │
+   buttons       → letter keys ─────────────→ ButtonState        ─┴─▶ ScrollEngine + DocumentView
 ```
 
 ## Tech

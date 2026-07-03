@@ -1,9 +1,7 @@
 import type { ButtonState } from './types';
 
 export const CONFIG = {
-  // Throttle (stick-as-mouse via Pointer Lock)
-  mouseFullThrottleRate: 1200, // px/s of mouse movement that maps to full throttle
-  invertThrottle: false,       // flip if QJoyControl's mouse Y is inverted
+  // Scroll throttle
   deadzone: 0.08,
   minMaxSpeed: 20,    // px/s
   maxMaxSpeed: 1500,  // px/s

@@ -25,5 +25,6 @@ export const CONFIG = {
     q: 'sl',      // SL          -> text size down
     e: 'sr',      // SR          -> text size up
     z: 'zl',      // ZL          -> toggle cruise
+    m: 'capture', // Capture     -> mirror the screen
   } as Record<string, keyof ButtonState>,
 };

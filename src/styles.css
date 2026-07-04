@@ -38,3 +38,5 @@ html, body { margin: 0; height: 100%; background: #000; color: #f4f4f4;
   background: #2b6cb0; color: #fff; font: 14px system-ui, sans-serif;
 }
 #connect-joycon[hidden] { display: none; }
+
+body.mirrored { transform: scaleX(-1); }

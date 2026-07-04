@@ -43,6 +43,8 @@ window.addEventListener('mousemove', () => markActivity(performance.now()));
 let fontSize = CONFIG.initialFontSize;
 view.setFontSize(fontSize);
 
+let mirrored = false;
+
 // ---- file loading ----
 let loading = false;
 async function loadFile(file: File) {
@@ -87,6 +89,10 @@ function applyCommand(cmd: ReturnType<ControlMapper['update']>[number]) {
   switch (cmd.type) {
     case 'toggleCruise':
       engine.toggleCruise();
+      break;
+    case 'toggleMirror':
+      mirrored = !mirrored;
+      document.body.classList.toggle('mirrored', mirrored);
       break;
     case 'maxSpeedStep':
       engine.stepMaxSpeed(cmd.delta);

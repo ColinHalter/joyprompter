@@ -3,6 +3,8 @@ import type { ButtonState } from './types';
 export const CONFIG = {
   // Scroll throttle
   deadzone: 0.08,
+  stickThreshold: 700,   // raw JoyCon stick units from center to trigger the binary throttle
+  invertThrottle: false, // flip if pushing the stick up scrolls the wrong way
   minMaxSpeed: 20,    // px/s
   maxMaxSpeed: 1500,  // px/s
   maxSpeedStep: 60,   // px/s per D-pad up/down press

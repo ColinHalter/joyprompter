@@ -21,6 +21,7 @@ it from your OS Bluetooth settings (it shows up as "Joy-Con (L)"). This is a one
 ## 3. Controls
 - **Stick up / down** — scroll forward / reverse at the max speed (release to hold).
 - **ZL** — toggle cruise (hands-free scroll at the max speed).
+- **Capture** — mirror the screen left-to-right (for a beam-splitter teleprompter).
 - **D-pad up / down** — increase / decrease max scroll speed.
 - **D-pad left / right** — seek by paragraph; **SL / SR** — text size down / up.
 

@@ -59,6 +59,7 @@ The keyboard is always active as a fallback, so you can use the app without a Jo
 | `i` / `k`   | Increase / decrease max speed          |
 | `j` / `l`   | Seek back / forward a paragraph        |
 | `q` / `e`   | Text size down / up                    |
+| `m`         | Mirror the screen                      |
 
 ## Controls (Left JoyCon)
 
@@ -66,6 +67,7 @@ The keyboard is always active as a fallback, so you can use the app without a Jo
 |--------------|------------------------------------------------|
 | Stick ▲ / ▼  | Throttle: scroll forward / reverse at max speed |
 | ZL           | Toggle cruise (hands-free at max speed)        |
+| Capture      | Mirror the screen left-to-right (beam-splitter) |
 | D-pad ▲ / ▼  | Increase / decrease max scroll speed           |
 | D-pad ◀ / ▶  | Seek back / forward one paragraph              |
 | SL / SR      | Text size down / up                            |

@@ -7,8 +7,12 @@ import {
 } from './joyconReport';
 
 /** Build a synthetic 0x30 report body (reportId already stripped, as WebHID delivers it). */
-function report({ buttons = 0, vertical = STICK_CENTER }: { buttons?: number; vertical?: number }): DataView {
+function report(
+  { buttons = 0, shared = 0, vertical = STICK_CENTER }:
+    { buttons?: number; shared?: number; vertical?: number },
+): DataView {
   const bytes = new Uint8Array(12);
+  bytes[3] = shared;  // shared-button byte (Minus/Capture/…)
   bytes[4] = buttons; // left-button byte
   bytes[6] = (vertical & 0x0f) << 4; // stick low nibble -> high nibble of byte 6
   bytes[7] = (vertical >> 4) & 0xff;  // stick high 8 bits
@@ -25,9 +29,14 @@ describe('decodeButtons', () => {
     expect(decodeButtons(report({ buttons: 0x20 })).sl).toBe(true);
     expect(decodeButtons(report({ buttons: 0x80 })).zl).toBe(true);
   });
+  it('maps the Capture bit from the shared-button byte', () => {
+    expect(decodeButtons(report({ shared: 0x20 })).capture).toBe(true);
+    expect(decodeButtons(report({ buttons: 0x02 })).capture).toBe(false);
+  });
   it('reports all-false when no bits are set', () => {
     expect(decodeButtons(report({}))).toEqual({
       up: false, down: false, left: false, right: false, sl: false, sr: false, zl: false,
+      capture: false,
     });
   });
 });

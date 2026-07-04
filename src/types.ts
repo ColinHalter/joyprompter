@@ -11,6 +11,7 @@ export interface ButtonState {
   sl: boolean;
   sr: boolean;
   zl: boolean;
+  capture: boolean;
 }
 
 export interface InputFrame {
@@ -20,6 +21,7 @@ export interface InputFrame {
 
 export type Command =
   | { type: 'toggleCruise' }
+  | { type: 'toggleMirror' }
   | { type: 'sizeStep'; delta: 1 | -1 }
   | { type: 'seek'; delta: 1 | -1 }
   | { type: 'maxSpeedStep'; delta: 1 | -1 };
@@ -30,6 +32,6 @@ export const NEUTRAL_FRAME: InputFrame = {
   stick: { x: 0, y: 0 },
   buttons: {
     up: false, down: false, left: false, right: false,
-    sl: false, sr: false, zl: false,
+    sl: false, sr: false, zl: false, capture: false,
   },
 };

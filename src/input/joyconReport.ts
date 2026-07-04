@@ -9,10 +9,12 @@ export const STICK_CENTER = 2048;
 
 /**
  * Decode the Left JoyCon buttons from a standard full-mode (0x30) report.
- * WebHID strips the reportId, so the left-button byte is at index 4.
+ * WebHID strips the reportId, so the left-button byte is at index 4 and the
+ * shared-button byte (which holds Capture) is at index 3.
  */
 export function decodeButtons(data: DataView): ButtonState {
   const b = data.getUint8(4);
+  const shared = data.getUint8(3);
   return {
     down: !!(b & 0x01),
     up: !!(b & 0x02),
@@ -21,6 +23,7 @@ export function decodeButtons(data: DataView): ButtonState {
     sr: !!(b & 0x10),
     sl: !!(b & 0x20),
     zl: !!(b & 0x80),
+    capture: !!(shared & 0x20),
   };
 }
 

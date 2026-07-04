@@ -16,7 +16,7 @@ export const CONFIG = {
   initialFontSize: 48,
   // HUD
   hudHideMs: 2500,
-  // Keys the app listens for (map QJoyControl buttons to these).
+  // Keyboard-fallback keys the app listens for (each maps to a controller action).
   keyMap: {
     i: 'up',      // D-pad up    -> max speed up
     k: 'down',    // D-pad down  -> max speed down

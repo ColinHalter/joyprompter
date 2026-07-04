@@ -4,8 +4,8 @@ import type { InputSource } from './InputSource';
 import { CONFIG } from '../config';
 
 /**
- * The app's sole input source. QJoyControl (or a bare keyboard for testing)
- * delivers everything as key events: ArrowUp / ArrowDown are the binary throttle
+ * Keyboard input source — the fallback when no JoyCon is connected (and the only
+ * option in non-Chromium browsers). ArrowUp / ArrowDown are the binary throttle
  * (stick up / down), and the CONFIG.keyMap keys are the buttons.
  */
 export class KeyInputSource implements InputSource {

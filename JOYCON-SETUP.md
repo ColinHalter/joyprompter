@@ -25,10 +25,11 @@ it from your OS Bluetooth settings (it shows up as "Joy-Con (L)"). This is a one
 - **D-pad left / right** — seek by paragraph; **SL / SR** — text size down / up.
 
 ## Tuning
-The stick is a binary throttle. If pushing up scrolls the wrong way, set
-`CONFIG.invertThrottle = true` in `src/config.ts`. If it triggers too easily or needs too
-big a push, adjust `CONFIG.stickThreshold` (raw stick units from center; larger = firmer
-push required).
+The stick is a binary throttle. If pushing up scrolls the wrong way, click the direction
+item in the HUD (`↑ = forward` / `↑ = reverse`) to flip it live — this resets each reload.
+To change the starting default, set `CONFIG.invertThrottle` in `src/config.ts`. If the
+throttle triggers too easily or needs too big a push, adjust `CONFIG.stickThreshold` (raw
+stick units from center; larger = firmer push required).
 
 ## Troubleshooting
 - **No "Connect Joy-Con" button:** your browser lacks WebHID — use Chrome/Edge, or the

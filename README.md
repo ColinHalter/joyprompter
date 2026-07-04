@@ -99,7 +99,7 @@ All tunables live in [`src/config.ts`](./src/config.ts):
 |---------|---------|
 | `deadzone` | Ignores tiny throttle jitter near center. |
 | `stickThreshold` | How far the JoyCon stick must move from center (raw units) to trigger the binary throttle. |
-| `invertThrottle` | Flip if pushing the stick up scrolls the wrong way. |
+| `invertThrottle` | Starting throttle direction; flip it live in-app via the HUD `↑ = forward` / `↑ = reverse` item (resets each reload). |
 | `minMaxSpeed` / `maxMaxSpeed` / `maxSpeedStep` / `initialMaxSpeed` | Scroll speed range and D-pad step. |
 | `minFontSize` / `maxFontSize` / `fontSizeStep` / `initialFontSize` | Text size range and SL/SR step. |
 | `hudHideMs` | How long before the HUD fades after inactivity. |

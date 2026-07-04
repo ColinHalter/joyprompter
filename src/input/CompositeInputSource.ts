@@ -5,10 +5,15 @@ import type { InputSource } from './InputSource';
 /**
  * Merges several input sources into one frame: buttons are OR'd across all
  * sources, and stick.y is taken from the first source (in constructor order)
- * that is deflected. Lets the JoyCon and keyboard drive the app simultaneously.
+ * that is deflected. stick.x is always emitted as 0 (x is unused across the
+ * app). Lets the JoyCon and keyboard drive the app simultaneously.
  */
 export class CompositeInputSource implements InputSource {
-  constructor(private sources: InputSource[]) {}
+  private sources: InputSource[];
+
+  constructor(sources: InputSource[]) {
+    this.sources = [...sources];
+  }
 
   start(): void {
     for (const s of this.sources) s.start();

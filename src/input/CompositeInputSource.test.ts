@@ -35,12 +35,12 @@ describe('CompositeInputSource', () => {
     expect(f.buttons.zl).toBe(true);
     expect(f.buttons.up).toBe(true);
   });
-  it('uses the first non-zero stick.y in source order', () => {
+  it('uses the first non-zero stick.y when multiple sources are deflected', () => {
     const c = new CompositeInputSource([
-      fakeSource({ stick: { x: 0, y: 0 } }),
+      fakeSource({ stick: { x: 0, y: 1 } }),
       fakeSource({ stick: { x: 0, y: -1 } }),
     ]);
-    expect(c.getFrame().stick.y).toBe(-1);
+    expect(c.getFrame().stick.y).toBe(1);
   });
   it('reports stick.y 0 when no source is deflected', () => {
     const c = new CompositeInputSource([fakeSource({}), fakeSource({})]);

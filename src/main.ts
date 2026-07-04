@@ -3,6 +3,7 @@ import { CONFIG } from './config';
 import { ControlMapper } from './control/ControlMapper';
 import { ScrollEngine } from './scroll/ScrollEngine';
 import { DocumentView } from './document/DocumentView';
+import { fileKind } from './document/fileType';
 import { nextParagraphOffset } from './document/paragraphs';
 import { Hud } from './hud/Hud';
 import { KeyInputSource } from './input/KeyInputSource';
@@ -55,6 +56,12 @@ let mirrored = false;
 let loading = false;
 async function loadFile(file: File) {
   if (loading) return;
+  if (fileKind(file) === 'markdown' && !window.confirm(
+    'Markdown files can contain malicious code (e.g. embedded HTML or scripts). ' +
+    'Only load Markdown from a source you trust.\n\nLoad this file?'
+  )) {
+    return;
+  }
   loading = true;
   try {
     await view.loadFile(file);
@@ -62,9 +69,9 @@ async function loadFile(file: File) {
     scroller.scrollTop = 0;
     engine.stop();
   } catch (err) {
-    console.error('Failed to load PDF:', err);
+    console.error('Failed to load file:', err);
     dropZone.classList.remove('hidden');
-    dropZone.textContent = 'Could not read that PDF. Click or drag another file.';
+    dropZone.textContent = 'Could not read that file. Click or drag a PDF or Markdown file.';
   } finally {
     loading = false;
   }

@@ -7,8 +7,8 @@
   </head>
   <body>
     <button id="connect-joycon" hidden>Connect Joy-Con</button>
-    <div id="drop-zone">Drag a PDF here, or click to choose a file</div>
-    <input id="file-input" type="file" accept="application/pdf" hidden />
+    <div id="drop-zone">Drag a PDF or Markdown file here, or click to choose one</div>
+    <input id="file-input" type="file" accept="application/pdf,.md,.markdown,text/markdown" hidden />
     <main id="scroller"><div id="doc"></div></main>
     <div id="hud"></div>
     <script type="module" src="/src/main.ts"></script>

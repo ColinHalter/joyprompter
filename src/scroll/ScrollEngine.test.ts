@@ -45,10 +45,13 @@ describe('ScrollEngine', () => {
     e.stop();
     expect(e.state).toBe('HOLD');
   });
-  it('steps max speed by a fine 20 px/s increment', () => {
+  it('defaults max speed to 100 px/s', () => {
+    expect(new ScrollEngine().maxSpeed).toBe(100);
+  });
+  it('steps max speed by a fine 10 px/s increment', () => {
     const e = new ScrollEngine({ maxSpeed: 300, deadzone: 0.1 });
     e.stepMaxSpeed(1);
-    expect(e.maxSpeed).toBe(320);
+    expect(e.maxSpeed).toBe(310);
     e.stepMaxSpeed(-1);
     expect(e.maxSpeed).toBe(300);
   });
@@ -56,7 +59,7 @@ describe('ScrollEngine', () => {
     const e = new ScrollEngine({ maxSpeed: 1490, deadzone: 0.1 });
     e.stepMaxSpeed(1);
     expect(e.maxSpeed).toBe(1500);
-    e.maxSpeed = 40;
+    e.maxSpeed = 25;
     e.stepMaxSpeed(-1);
     expect(e.maxSpeed).toBe(20);
   });

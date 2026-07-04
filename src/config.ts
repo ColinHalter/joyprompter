@@ -7,8 +7,8 @@ export const CONFIG = {
   invertThrottle: false, // flip if pushing the stick up scrolls the wrong way
   minMaxSpeed: 20,    // px/s
   maxMaxSpeed: 1500,  // px/s
-  maxSpeedStep: 20,   // px/s per D-pad up/down press
-  initialMaxSpeed: 300,
+  maxSpeedStep: 10,   // px/s per D-pad up/down press
+  initialMaxSpeed: 100,
   // Text
   minFontSize: 16,    // px
   maxFontSize: 160,   // px

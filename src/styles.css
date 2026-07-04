@@ -65,8 +65,12 @@ body.light #drop-zone.dragover { background: rgba(200,230,200,0.95); color: #000
 #doc.md a { color: #7fb0ff; }
 #doc.md hr { border: none; border-top: 1px solid #555; margin: 1em 0; }
 #doc.md img { max-width: 100%; }
+#doc.md table { border-collapse: collapse; margin: 0 0 0.8em; }
+#doc.md th, #doc.md td { border: 1px solid #555; padding: 0.3em 0.6em; text-align: left; }
+#doc.md th { font-weight: 700; }
 
 body.light #doc.md blockquote { border-left-color: #ccc; color: #555; }
 body.light #doc.md code, body.light #doc.md pre { background: rgba(0,0,0,0.06); }
 body.light #doc.md a { color: #1a5fb4; }
 body.light #doc.md hr { border-top-color: #ccc; }
+body.light #doc.md th, body.light #doc.md td { border-color: #ccc; }

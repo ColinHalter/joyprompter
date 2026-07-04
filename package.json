@@ -17,6 +17,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "marked": "^18.0.5",
     "pdfjs-dist": "^4.2.67"
   }
 }

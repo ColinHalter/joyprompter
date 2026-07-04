@@ -1,6 +1,11 @@
 import { fileKind } from './fileType';
 import { extractPdfParagraphs } from './pdf';
 import { renderMarkdownToHtml } from './markdown';
+import { splitHardBreakLines } from './lineSplit';
+import { decorateInline } from './decorateInline';
+
+/** Markdown elements that act as seek stops: headings, paragraphs, bullets, quotes, rows, and split lines. */
+const MD_SEEK_SELECTOR = 'h1,h2,h3,h4,h5,h6,p,li,blockquote,pre,tr,hr,.tp-line';
 
 export class DocumentView {
   private paras: HTMLElement[] = [];
@@ -39,7 +44,9 @@ export class DocumentView {
   private renderMarkdown(html: string): void {
     this.container.classList.add('md');
     this.container.innerHTML = html;
-    this.paras = Array.from(this.container.children) as HTMLElement[];
+    decorateInline(this.container);
+    splitHardBreakLines(this.container);
+    this.paras = Array.from(this.container.querySelectorAll(MD_SEEK_SELECTOR)) as HTMLElement[];
     if (this.container.textContent?.trim() === '') {
       this.showEmpty('No text found in this file.');
     }
@@ -59,8 +66,9 @@ export class DocumentView {
     this.container.style.fontSize = `${px}px`;
   }
 
-  /** offsetTop of each rendered block, for seeking. */
+  /** Sorted, de-duplicated offsetTop of each seek stop (blocks/bullets/lines share y for nested matches). */
   paragraphOffsets(): number[] {
-    return this.paras.map((p) => p.offsetTop);
+    const tops = this.paras.map((p) => p.offsetTop);
+    return Array.from(new Set(tops)).sort((a, b) => a - b);
   }
 }

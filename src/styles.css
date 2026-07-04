@@ -56,13 +56,16 @@ body.light #drop-zone.dragover { background: rgba(200,230,200,0.95); color: #000
 #doc.md h3 { font-size: 1.2em; font-weight: 700; margin: 0.4em 0; }
 #doc.md h4, #doc.md h5, #doc.md h6 { font-weight: 700; margin: 0.4em 0; }
 #doc.md p { margin: 0 0 0.8em; }
+#doc.md .tp-line { display: block; }
 #doc.md ul, #doc.md ol { margin: 0 0 0.8em; padding-left: 1.5em; }
-#doc.md li { margin: 0.2em 0; }
+#doc.md li { margin: 0.9em 0; }
 #doc.md blockquote { margin: 0 0 0.8em; padding-left: 0.8em; border-left: 4px solid #666; color: #b8c0cc; font-style: italic; }
 #doc.md code { font-family: ui-monospace, monospace; font-size: 0.9em; background: rgba(255,255,255,0.1); padding: 0.1em 0.3em; border-radius: 3px; }
 #doc.md pre { background: rgba(255,255,255,0.08); padding: 0.6em 0.8em; border-radius: 6px; overflow-x: auto; }
 #doc.md pre code { background: none; padding: 0; }
 #doc.md a { color: #7fb0ff; }
+#doc.md .tp-bracket { color: #a970ff; }
+#doc.md mark { background: #ffe066; color: #111; border-radius: 2px; padding: 0 0.15em; }
 #doc.md hr { border: none; border-top: 1px solid #555; margin: 1em 0; }
 #doc.md img { max-width: 100%; }
 #doc.md table { border-collapse: collapse; margin: 0 0 0.8em; }
@@ -72,5 +75,6 @@ body.light #drop-zone.dragover { background: rgba(200,230,200,0.95); color: #000
 body.light #doc.md blockquote { border-left-color: #ccc; color: #555; }
 body.light #doc.md code, body.light #doc.md pre { background: rgba(0,0,0,0.06); }
 body.light #doc.md a { color: #1a5fb4; }
+body.light #doc.md .tp-bracket { color: #7c3aed; }
 body.light #doc.md hr { border-top-color: #ccc; }
 body.light #doc.md th, body.light #doc.md td { border-color: #ccc; }

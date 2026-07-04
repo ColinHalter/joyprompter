@@ -1,7 +1,8 @@
 # JoyCon Teleprompter
 
 A browser-based teleprompter you drive with a Nintendo Switch **Left JoyCon**. Load a
-PDF, and its text is reflowed into large, centered, vertically-scrolling copy. The
+PDF (reflowed into centered copy) or a Markdown file (rendered with formatting), as large,
+vertically-scrolling text. The
 analog stick acts as a binary **throttle** (push up to scroll forward, down to reverse,
 both at the max speed); ZL toggles hands-free **cruise**; the D-pad and shoulder buttons
 handle max speed, paragraph seeking, and text size.
@@ -10,11 +11,12 @@ Input comes **directly from the JoyCon** over the browser's [WebHID API](https:/
 no driver or helper app. Click **Connect Joy-Con** once and the app reads the stick and
 buttons straight from the controller. A keyboard fallback works in any browser.
 
-The PDF is parsed entirely in your browser — nothing is uploaded, and it works offline.
+Documents are parsed entirely in your browser — nothing is uploaded, and it works offline.
 
 ## Features
 
 - PDF text extraction and reflow into a clean teleprompter column
+- Markdown files rendered with formatting (headings, lists, bold/italic, blockquotes, code)
 - Binary throttle scrolling — forward/reverse at the max speed
 - Hands-free cruise mode at an adjustable max speed
 - Text-size and per-paragraph seek controls
@@ -42,7 +44,8 @@ npm run dev
 
 Vite prints a local URL (default `http://localhost:5173`). Open it, then:
 
-1. **Load a PDF** — drag a PDF onto the window, or click to choose one.
+1. **Load a document** — drag a PDF or Markdown file onto the window, or click to choose one.
+   (Loading Markdown asks you to confirm, since a `.md` can contain embedded code.)
 2. **Connect the JoyCon** — click **Connect Joy-Con** (top-right) once and pick the Left
    JoyCon. After the first grant the browser reconnects automatically on reload; the HUD
    shows **"Joy-Con ●"** when connected. Or skip it and use the keyboard keys below.
@@ -121,8 +124,11 @@ All tunables live in [`src/config.ts`](./src/config.ts):
 │   ├── control/ControlMapper.ts      # button edge-detection → commands
 │   ├── scroll/throttle.ts            # applyDeadzone
 │   ├── scroll/ScrollEngine.ts        # HOLD/MANUAL/CRUISE state + velocity
-│   ├── document/paragraphs.ts        # text extraction + seek helpers
-│   ├── document/DocumentView.ts      # PDF.js load + reflow + font size
+│   ├── document/DocumentView.ts      # dispatch by file type + render + font size
+│   ├── document/pdf.ts               # PDF.js text extraction → paragraphs
+│   ├── document/markdown.ts          # Markdown → HTML (marked)
+│   ├── document/fileType.ts          # classify pdf vs markdown
+│   ├── document/paragraphs.ts        # reflow + seek helpers
 │   ├── hud/Hud.ts                    # status overlay
 │   └── input/
 │       ├── InputSource.ts            # source interface
@@ -147,5 +153,5 @@ Left JoyCon ──(Bluetooth HID)──▶ WebHID ──▶ 0x30 report
 
 ## Tech
 
-TypeScript · Vite · Vitest · [PDF.js](https://mozilla.github.io/pdf.js/) · [WebHID](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API). No UI
+TypeScript · Vite · Vitest · [PDF.js](https://mozilla.github.io/pdf.js/) · [marked](https://marked.js.org/) · [WebHID](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API). No UI
 framework — the app is a small imperative render loop.

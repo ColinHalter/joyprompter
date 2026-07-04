@@ -19,6 +19,7 @@ The PDF is parsed entirely in your browser — nothing is uploaded, and it works
 - Hands-free cruise mode at an adjustable max speed
 - Text-size and per-paragraph seek controls
 - On-screen HUD: scroll state, max speed, text size, progress
+- Light/dark theme toggle — click the **Theme** item in the HUD
 - Reads the JoyCon directly over WebHID (Chromium), with a keyboard fallback everywhere
 
 ## Prerequisites

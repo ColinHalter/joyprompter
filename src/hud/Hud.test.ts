@@ -32,3 +32,24 @@ describe('Hud throttle-direction item', () => {
     expect(el.querySelector('[data-action="flip-throttle"]')?.textContent).toContain('↑ = reverse');
   });
 });
+
+describe('Hud rendering stability', () => {
+  it('reuses DOM nodes when the model is unchanged, so the toggle stays clickable', () => {
+    const el = document.createElement('div');
+    const hud = new Hud(el);
+    hud.update(base);
+    const first = el.querySelector('[data-action="flip-throttle"]');
+    hud.update(base); // identical model — must not recreate the DOM mid-click
+    const second = el.querySelector('[data-action="flip-throttle"]');
+    expect(first).not.toBeNull();
+    expect(second).toBe(first);
+  });
+  it('re-renders when the model changes', () => {
+    const el = document.createElement('div');
+    const hud = new Hud(el);
+    hud.update({ ...base, inverted: false });
+    expect(el.querySelector('[data-action="flip-throttle"]')?.textContent).toContain('↑ = forward');
+    hud.update({ ...base, inverted: true });
+    expect(el.querySelector('[data-action="flip-throttle"]')?.textContent).toContain('↑ = reverse');
+  });
+});

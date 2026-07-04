@@ -18,11 +18,12 @@ export interface HudModel {
 }
 
 export class Hud {
+  private lastHtml = '';
   constructor(private el: HTMLElement) {}
 
   update(m: HudModel): void {
     const pct = Math.round(m.progress * 100);
-    this.el.innerHTML = `
+    const html = `
       <span class="hud-item ${m.connected ? 'ok' : 'bad'}">${m.connected ? 'Joy-Con ●' : 'Joy-Con ○'}</span>
       <span class="hud-item">${stateLabel(m.state)}</span>
       <span class="hud-item">Max ${Math.round(m.maxSpeed)} px/s</span>
@@ -30,5 +31,11 @@ export class Hud {
       <span class="hud-item">${pct}%</span>
       <span class="hud-item hud-toggle" data-action="flip-throttle">${m.inverted ? '↑ = reverse' : '↑ = forward'}</span>
     `;
+    // Only touch the DOM when the rendered content changes. Rebuilding innerHTML every
+    // frame would destroy and recreate the clickable toggle span mid-click, so the click
+    // gesture's mousedown/mouseup would land on different nodes and never activate it.
+    if (html === this.lastHtml) return;
+    this.lastHtml = html;
+    this.el.innerHTML = html;
   }
 }

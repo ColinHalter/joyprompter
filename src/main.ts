@@ -6,20 +6,26 @@ import { DocumentView } from './document/DocumentView';
 import { nextParagraphOffset } from './document/paragraphs';
 import { Hud } from './hud/Hud';
 import { KeyInputSource } from './input/KeyInputSource';
+import { JoyConHidInputSource } from './input/JoyConHidInputSource';
+import { CompositeInputSource } from './input/CompositeInputSource';
 
 const scroller = document.getElementById('scroller') as HTMLElement;
 const docEl = document.getElementById('doc') as HTMLElement;
 const dropZone = document.getElementById('drop-zone') as HTMLElement;
 const fileInput = document.getElementById('file-input') as HTMLInputElement;
 const hudEl = document.getElementById('hud') as HTMLElement;
+const connectBtn = document.getElementById('connect-joycon') as HTMLButtonElement;
 
 const view = new DocumentView(docEl);
 const engine = new ScrollEngine();
 const mapper = new ControlMapper();
 const hud = new Hud(hudEl);
 
-const source = new KeyInputSource();
+const joycon = new JoyConHidInputSource();
+const source = new CompositeInputSource([joycon, new KeyInputSource()]);
 source.start();
+
+connectBtn.addEventListener('click', () => { void joycon.connect(); });
 
 let fontSize = CONFIG.initialFontSize;
 view.setFontSize(fontSize);
@@ -91,6 +97,9 @@ function tick(ts: number) {
   const dt = prevTs === null ? 0 : (ts - prevTs) / 1000;
   prevTs = ts;
 
+  const connected = joycon.isConnected();
+  connectBtn.hidden = !navigator.hid || connected;
+
   const frame = source.getFrame();
   const cmds = mapper.update(frame);
   if (cmds.length) markActivity(ts);
@@ -107,6 +116,7 @@ function tick(ts: number) {
   if (ts - lastActivity > CONFIG.hudHideMs) hudEl.classList.add('faded');
 
   hud.update({
+    connected,
     state: engine.state,
     maxSpeed: engine.maxSpeed,
     fontSize,

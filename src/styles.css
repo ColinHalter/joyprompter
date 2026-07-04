@@ -28,3 +28,12 @@ html, body { margin: 0; height: 100%; background: #000; color: #f4f4f4;
 }
 #hud.faded { opacity: 0; }
 .hud-item { color: #cfd8e3; }
+.hud-item.ok { color: #7fd88f; }
+.hud-item.bad { color: #e08080; }
+
+#connect-joycon {
+  position: fixed; top: 12px; right: 12px; z-index: 20;
+  padding: 8px 14px; border: 0; border-radius: 6px; cursor: pointer;
+  background: #2b6cb0; color: #fff; font: 14px system-ui, sans-serif;
+}
+#connect-joycon[hidden] { display: none; }

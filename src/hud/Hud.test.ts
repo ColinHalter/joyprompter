@@ -8,6 +8,7 @@ const base: HudModel = {
   fontSize: 48,
   progress: 0,
   inverted: false,
+  light: false,
 };
 
 describe('stateLabel', () => {
@@ -30,6 +31,21 @@ describe('Hud throttle-direction item', () => {
     const el = document.createElement('div');
     new Hud(el).update({ ...base, inverted: true });
     expect(el.querySelector('[data-action="flip-throttle"]')?.textContent).toContain('↑ = reverse');
+  });
+});
+
+describe('Hud theme item', () => {
+  it('shows "Theme: dark" and a toggle action when not in light mode', () => {
+    const el = document.createElement('div');
+    new Hud(el).update({ ...base, light: false });
+    const toggle = el.querySelector('[data-action="toggle-theme"]');
+    expect(toggle).not.toBeNull();
+    expect(toggle?.textContent).toContain('Theme: dark');
+  });
+  it('shows "Theme: light" when in light mode', () => {
+    const el = document.createElement('div');
+    new Hud(el).update({ ...base, light: true });
+    expect(el.querySelector('[data-action="toggle-theme"]')?.textContent).toContain('Theme: light');
   });
 });
 

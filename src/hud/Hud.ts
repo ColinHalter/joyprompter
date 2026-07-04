@@ -15,6 +15,7 @@ export interface HudModel {
   fontSize: number;
   progress: number; // 0..1
   inverted: boolean;
+  light: boolean;
 }
 
 export class Hud {
@@ -30,6 +31,7 @@ export class Hud {
       <span class="hud-item">Text ${Math.round(m.fontSize)} px</span>
       <span class="hud-item">${pct}%</span>
       <span class="hud-item hud-toggle" data-action="flip-throttle">${m.inverted ? '↑ = reverse' : '↑ = forward'}</span>
+      <span class="hud-item hud-toggle" data-action="toggle-theme">${m.light ? 'Theme: light' : 'Theme: dark'}</span>
     `;
     // Only touch the DOM when the rendered content changes. Rebuilding innerHTML every
     // frame would destroy and recreate the clickable toggle span mid-click, so the click

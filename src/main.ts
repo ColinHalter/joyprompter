@@ -22,6 +22,7 @@ const mapper = new ControlMapper();
 const hud = new Hud(hudEl);
 
 let invertThrottle = CONFIG.invertThrottle;
+let lightMode = false;
 const joycon = new JoyConHidInputSource({ getInvert: () => invertThrottle });
 const source = new CompositeInputSource([joycon, new KeyInputSource()]);
 source.start();
@@ -31,8 +32,13 @@ connectBtn.addEventListener('click', () => { void joycon.connect(); });
 // Flip the throttle direction from the HUD. Delegated because the HUD's innerHTML
 // is rebuilt every frame, which would wipe a per-element listener.
 hudEl.addEventListener('click', (e) => {
-  if ((e.target as HTMLElement).closest('[data-action="flip-throttle"]')) {
+  const target = e.target as HTMLElement;
+  if (target.closest('[data-action="flip-throttle"]')) {
     invertThrottle = !invertThrottle;
+    markActivity(performance.now());
+  } else if (target.closest('[data-action="toggle-theme"]')) {
+    lightMode = !lightMode;
+    document.body.classList.toggle('light', lightMode);
     markActivity(performance.now());
   }
 });
@@ -141,6 +147,7 @@ function tick(ts: number) {
     fontSize,
     progress: maxScroll > 0 ? pos / maxScroll : 0,
     inverted: invertThrottle,
+    light: lightMode,
   });
 
   requestAnimationFrame(tick);

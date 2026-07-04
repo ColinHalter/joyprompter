@@ -40,3 +40,11 @@ html, body { margin: 0; height: 100%; background: #000; color: #f4f4f4;
 #connect-joycon[hidden] { display: none; }
 
 body.mirrored { transform: scaleX(-1); }
+
+body.light { background: #fff; color: #111; color-scheme: light; }
+body.light #hud { background: rgba(255,255,255,0.75); }
+body.light .hud-item { color: #334; }
+body.light .hud-item.ok { color: #1f8f3a; }
+body.light .hud-item.bad { color: #c02b2b; }
+body.light #drop-zone { background: rgba(255,255,255,0.9); color: #444; }
+body.light #drop-zone.dragover { background: rgba(200,230,200,0.95); color: #000; }

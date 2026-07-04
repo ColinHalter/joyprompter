@@ -30,6 +30,7 @@ html, body { margin: 0; height: 100%; background: #000; color: #f4f4f4;
 .hud-item { color: #cfd8e3; }
 .hud-item.ok { color: #7fd88f; }
 .hud-item.bad { color: #e08080; }
+.hud-toggle { cursor: pointer; text-decoration: underline; }
 
 #connect-joycon {
   position: fixed; top: 12px; right: 12px; z-index: 20;

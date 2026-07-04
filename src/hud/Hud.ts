@@ -14,6 +14,7 @@ export interface HudModel {
   maxSpeed: number;
   fontSize: number;
   progress: number; // 0..1
+  inverted: boolean;
 }
 
 export class Hud {
@@ -27,6 +28,7 @@ export class Hud {
       <span class="hud-item">Max ${Math.round(m.maxSpeed)} px/s</span>
       <span class="hud-item">Text ${Math.round(m.fontSize)} px</span>
       <span class="hud-item">${pct}%</span>
+      <span class="hud-item hud-toggle" data-action="flip-throttle">${m.inverted ? '↑ = reverse' : '↑ = forward'}</span>
     `;
   }
 }

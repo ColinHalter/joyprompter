@@ -24,12 +24,14 @@ export class JoyConHidInputSource implements InputSource {
   private device: HIDDevice | null = null;
   private packet = 0;
 
+  constructor(private opts: { getInvert: () => boolean }) {}
+
   private onInputReport = (e: HIDInputReportEvent): void => {
     if (e.reportId !== FULL_REPORT_ID) return;
     this.frame.buttons = decodeButtons(e.data);
     this.frame.stick.y = decodeThrottle(e.data, {
       threshold: CONFIG.stickThreshold,
-      invert: CONFIG.invertThrottle,
+      invert: this.opts.getInvert(),
     });
   };
 

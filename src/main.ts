@@ -21,11 +21,24 @@ const engine = new ScrollEngine();
 const mapper = new ControlMapper();
 const hud = new Hud(hudEl);
 
-const joycon = new JoyConHidInputSource();
+let invertThrottle = CONFIG.invertThrottle;
+const joycon = new JoyConHidInputSource({ getInvert: () => invertThrottle });
 const source = new CompositeInputSource([joycon, new KeyInputSource()]);
 source.start();
 
 connectBtn.addEventListener('click', () => { void joycon.connect(); });
+
+// Flip the throttle direction from the HUD. Delegated because the HUD's innerHTML
+// is rebuilt every frame, which would wipe a per-element listener.
+hudEl.addEventListener('click', (e) => {
+  if ((e.target as HTMLElement).closest('[data-action="flip-throttle"]')) {
+    invertThrottle = !invertThrottle;
+    markActivity(performance.now());
+  }
+});
+
+// Reveal the auto-hiding HUD on mouse movement so its controls stay clickable.
+window.addEventListener('mousemove', () => markActivity(performance.now()));
 
 let fontSize = CONFIG.initialFontSize;
 view.setFontSize(fontSize);
@@ -121,6 +134,7 @@ function tick(ts: number) {
     maxSpeed: engine.maxSpeed,
     fontSize,
     progress: maxScroll > 0 ? pos / maxScroll : 0,
+    inverted: invertThrottle,
   });
 
   requestAnimationFrame(tick);

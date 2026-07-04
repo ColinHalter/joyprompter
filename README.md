@@ -1,34 +1,14 @@
 # JoyCon Teleprompter
 
-A browser-based teleprompter you drive with a Nintendo Switch **Left JoyCon**. Load a
-PDF (reflowed into centered copy) or a Markdown file (rendered with formatting), as large,
-vertically-scrolling text. The
-analog stick acts as a binary **throttle** (push up to scroll forward, down to reverse,
-both at the max speed); ZL toggles hands-free **cruise**; the D-pad and shoulder buttons
-handle max speed, paragraph seeking, and text size.
+A browser-based teleprompter application for use with a Nintendo Joycon controller. Accepts a PDF or Markdown file and scrolls it downward at a configurable speed.
 
-Input comes **directly from the JoyCon** over the browser's [WebHID API](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API) —
-no driver or helper app. Click **Connect Joy-Con** once and the app reads the stick and
-buttons straight from the controller. A keyboard fallback works in any browser.
-
-Documents are parsed entirely in your browser — nothing is uploaded, and it works offline.
-
-## Features
-
-- PDF text extraction and reflow into a clean teleprompter column
-- Markdown files rendered with formatting (headings, lists, bold/italic, blockquotes, code)
-- Binary throttle scrolling — forward/reverse at the max speed
-- Hands-free cruise mode at an adjustable max speed
-- Text-size and per-paragraph seek controls
-- On-screen HUD: scroll state, max speed, text size, progress
-- Light/dark theme toggle — click the **Theme** item in the HUD
-- Reads the JoyCon directly over WebHID (Chromium), with a keyboard fallback everywhere
+Prompter scrolling can be controlled either with keyboard commands or directly from the JoyCon (via [WebHID API](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API))
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 18+ and npm
-- A modern browser (ES modules). For JoyCon use: a Chromium browser (Chrome/Edge) with WebHID
-- A Left JoyCon paired over Bluetooth (see [JOYCON-SETUP.md](./JOYCON-SETUP.md))
+- A Chromium browser (Chrome/Edge) with WebHID (For Joycon connectivity. Non-chromium is fine for keyboard-only control)
+- (Optional) A JoyCon controller paired over Bluetooth (see [JOYCON-SETUP.md](./JOYCON-SETUP.md))
 
 ## Install
 
@@ -42,19 +22,17 @@ npm install
 npm run dev
 ```
 
-Vite prints a local URL (default `http://localhost:5173`). Open it, then:
+To access locally, load `http://localhost:5173` then:
 
 1. **Load a document** — drag a PDF or Markdown file onto the window, or click to choose one.
    (Loading Markdown asks you to confirm, since a `.md` can contain embedded code.)
-2. **Connect the JoyCon** — click **Connect Joy-Con** (top-right) once and pick the Left
-   JoyCon. After the first grant the browser reconnects automatically on reload; the HUD
-   shows **"Joy-Con ●"** when connected. Or skip it and use the keyboard keys below.
+2. **Connect the JoyCon** — click **Connect Joy-Con** (top-right) once and select the JoyCon. 
+3. The HUD shows **"Joy-Con ●"** when connected. Or skip it and use the keyboard keys below.
 
 > For pairing and browser details, see [JOYCON-SETUP.md](./JOYCON-SETUP.md).
 
 ### Keyboard keys
 
-The keyboard is always active as a fallback, so you can use the app without a JoyCon:
 
 | Key         | Action                                 |
 |-------------|----------------------------------------|
@@ -65,7 +43,7 @@ The keyboard is always active as a fallback, so you can use the app without a Jo
 | `q` / `e`   | Text size down / up                    |
 | `m`         | Mirror the screen                      |
 
-## Controls (Left JoyCon)
+## Controls (JoyCon)
 
 | Input        | Action                                         |
 |--------------|------------------------------------------------|
@@ -76,10 +54,7 @@ The keyboard is always active as a fallback, so you can use the app without a Jo
 | D-pad ◀ / ▶  | Seek back / forward one paragraph              |
 | SL / SR      | Text size down / up                            |
 
-**Scroll behavior:** centering the stick holds position; pushing up or down scrolls at the
-max speed. Pressing ZL starts cruise; pressing again pauses; nudging the stick during
-cruise hands control back to manual. See [JOYCON-SETUP.md](./JOYCON-SETUP.md) for pairing
-and connection details.
+**Scroll behavior:** centering the stick holds position; pushing up or down scrolls at the max speed. Pressing ZL starts cruise; pressing again pauses; nudging the stick during cruise hands control back to manual. See [JOYCON-SETUP.md](./JOYCON-SETUP.md) for pairing and connection details.
 
 ## Build (production)
 

@@ -130,3 +130,7 @@ Left JoyCon ──(Bluetooth HID)──▶ WebHID ──▶ 0x30 report
 
 TypeScript · Vite · Vitest · [PDF.js](https://mozilla.github.io/pdf.js/) · [marked](https://marked.js.org/) · [WebHID](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API). No UI
 framework — the app is a small imperative render loop.
+
+## AI Disclosure
+
+Most of this was (very obviously) generated using Claude Code. I am not much of a Node guy and I mainly made this for personal use.

@@ -14,6 +14,10 @@ describe('ControlMapper', () => {
     const m = new ControlMapper();
     expect(m.update(frameWith({ zl: true }))).toEqual([{ type: 'toggleCruise' }]);
   });
+  it('emits toggleMirror on a Capture press edge', () => {
+    const m = new ControlMapper();
+    expect(m.update(frameWith({ capture: true }))).toEqual([{ type: 'toggleMirror' }]);
+  });
   it('does not repeat a command while the button stays held', () => {
     const m = new ControlMapper();
     m.update(frameWith({ zl: true }));

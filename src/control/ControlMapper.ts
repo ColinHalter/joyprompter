@@ -10,6 +10,7 @@ export class ControlMapper {
       frame.buttons[b] && !this.prev.buttons[b];
 
     if (pressed('zl')) cmds.push({ type: 'toggleCruise' });
+    if (pressed('capture')) cmds.push({ type: 'toggleMirror' });
     if (pressed('up')) cmds.push({ type: 'maxSpeedStep', delta: 1 });
     if (pressed('down')) cmds.push({ type: 'maxSpeedStep', delta: -1 });
     if (pressed('right')) cmds.push({ type: 'seek', delta: 1 });

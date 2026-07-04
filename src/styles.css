@@ -46,5 +46,6 @@ body.light #hud { background: rgba(255,255,255,0.75); }
 body.light .hud-item { color: #334; }
 body.light .hud-item.ok { color: #1f8f3a; }
 body.light .hud-item.bad { color: #c02b2b; }
+body.light .tp-empty { color: #c02b2b; }
 body.light #drop-zone { background: rgba(255,255,255,0.9); color: #444; }
 body.light #drop-zone.dragover { background: rgba(200,230,200,0.95); color: #000; }
